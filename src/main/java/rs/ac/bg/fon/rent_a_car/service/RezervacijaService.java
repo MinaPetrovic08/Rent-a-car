@@ -13,9 +13,9 @@ import rs.ac.bg.fon.rent_a_car.dto.RezervacijaDto;
  * @author Mina
  */
 public interface RezervacijaService {
-    public void add(RezervacijaData rezervacijaData);
+    public RezervacijaDto add(RezervacijaData rezervacijaData);
     public void delete(Long rezervacijaID);
-    public void update(Long rezervacijaID, RezervacijaData rezervacijaData);
+    public RezervacijaDto update(Long rezervacijaID, RezervacijaData rezervacijaData);
     
     public List<RezervacijaDto> getAll();
     public RezervacijaDto getById(Long rezervacijaID);
