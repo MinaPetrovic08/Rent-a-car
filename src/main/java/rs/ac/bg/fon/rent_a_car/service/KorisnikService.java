@@ -13,9 +13,9 @@ import rs.ac.bg.fon.rent_a_car.dto.KorisnikDto;
  * @author Mina
  */
 public interface KorisnikService {
-    public void add(KorisnikDto korisnikDto);
+    public KorisnikDto add(KorisnikDto korisnikDto);
     public void delete(Long korisnikID);
-    public void update(Long korisnikID, KorisnikDto korisnikDto);
+    public KorisnikDto update(Long korisnikID, KorisnikDto korisnikDto);
     
     public List<KorisnikDto> getAll();
 

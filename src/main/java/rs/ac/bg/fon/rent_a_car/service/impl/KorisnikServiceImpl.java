@@ -35,11 +35,11 @@ public class KorisnikServiceImpl implements KorisnikService{
     }
     
     @Override
-    public void add(KorisnikDto korisnikDto) {
+    public KorisnikDto add(KorisnikDto korisnikDto) {
         if(korisnikDto.getJMBG().length()!=13){
             throw new IllegalArgumentException("JMBG mora imati 13 cifara!");
         }
-        korisnikRepository.save(mapper.korisnikDtoToKorisnik(korisnikDto));
+        return mapper.korisnikToKorisnikDto(korisnikRepository.save(mapper.korisnikDtoToKorisnik(korisnikDto)));
     }
 
     @Override
@@ -52,7 +52,7 @@ public class KorisnikServiceImpl implements KorisnikService{
     }
 
     @Override
-    public void update(Long korisnikID, KorisnikDto korisnikDto) {
+    public KorisnikDto update(Long korisnikID, KorisnikDto korisnikDto) {
         Optional<Korisnik> k = korisnikRepository.findById(korisnikID);
         if(!k.isPresent()){
             throw new EntityNotFoundException("Greska! Korisnik ne postoji u bazi!");
@@ -65,7 +65,7 @@ public class KorisnikServiceImpl implements KorisnikService{
         k.get().setAdresa(korisnikDto.getAdresa());
         k.get().setEmail(korisnikDto.getEmail());
         k.get().setTelefon(korisnikDto.getTelefon());
-        korisnikRepository.save(k.get());
+        return mapper.korisnikToKorisnikDto(korisnikRepository.save(k.get()));
     }
 
     @Override

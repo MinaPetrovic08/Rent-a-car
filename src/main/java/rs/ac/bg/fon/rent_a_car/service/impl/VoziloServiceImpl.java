@@ -35,8 +35,8 @@ public class VoziloServiceImpl implements VoziloService{
     }
 
     @Override
-    public void add(VoziloDto voziloDto) {
-        voziloRepository.save(mapper.voziloDtoToVozilo(voziloDto));
+    public VoziloDto add(VoziloDto voziloDto) {
+        return mapper.voziloToVoziloDto(voziloRepository.save(mapper.voziloDtoToVozilo(voziloDto)));
     }
 
     @Override
@@ -49,7 +49,7 @@ public class VoziloServiceImpl implements VoziloService{
     }
 
     @Override
-    public void update(Long voziloID, VoziloDto voziloDto) {
+    public VoziloDto update(Long voziloID, VoziloDto voziloDto) {
         Optional<Vozilo> vozilo = voziloRepository.findById(voziloID);
         if(!vozilo.isPresent()){
             throw new EntityNotFoundException("Greska! Vozilo ne postoji u bazi!");
@@ -60,7 +60,7 @@ public class VoziloServiceImpl implements VoziloService{
         vozilo.get().setModel(voziloDto.getModel());
         vozilo.get().setRegistarskiBroj(voziloDto.getRegistarskiBroj());
         vozilo.get().setTipVozila(mapper.tipVozilaDtoToTipVozila(voziloDto.getTipVozila()));
-        voziloRepository.save(vozilo.get());
+        return mapper.voziloToVoziloDto(voziloRepository.save(vozilo.get()));
     }
 
     @Override

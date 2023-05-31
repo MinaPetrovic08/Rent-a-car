@@ -12,9 +12,9 @@ import rs.ac.bg.fon.rent_a_car.dto.VoziloDto;
  * @author Mina
  */
 public interface VoziloService {
-     public void add(VoziloDto voziloDto);
+     public VoziloDto add(VoziloDto voziloDto);
     public void delete(Long voziloID);
-    public void update(Long voziloId, VoziloDto voziloDto);
+    public VoziloDto update(Long voziloId, VoziloDto voziloDto);
     
     public List<VoziloDto> getAll();
 

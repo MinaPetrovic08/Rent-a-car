@@ -53,7 +53,7 @@ public class RezervacijaServiceImpl implements RezervacijaService {
     }
 
     @Override
-    public void add(RezervacijaData rezervacijaData) {
+    public RezervacijaDto add(RezervacijaData rezervacijaData) {
         Rezervacija rezervacija = new Rezervacija();
         rezervacija.setCenaBezPDV(rezervacijaData.getCenaBezPDV());
         rezervacija.setCenaSaPDV(rezervacijaData.getCenaSaPDV());
@@ -70,7 +70,7 @@ public class RezervacijaServiceImpl implements RezervacijaService {
             stavkeRezervacije.add(stavkaRezervacije);
         }
         rezervacija.setStavkeRezervacije(stavkeRezervacije);
-        rezervacijaRepository.save(rezervacija);
+       return  mapper.rezervacijaToRezervacijaDto(rezervacijaRepository.save(rezervacija));
     }
 
     @Override
@@ -116,7 +116,7 @@ public class RezervacijaServiceImpl implements RezervacijaService {
     }
 
     @Override
-    public void update(Long rezervacijaID, RezervacijaData rezervacijaData) {
+    public RezervacijaDto update(Long rezervacijaID, RezervacijaData rezervacijaData) {
         Optional<Rezervacija> rez = rezervacijaRepository.findById(rezervacijaID);
         if(!rez.isPresent()){
             throw new EntityNotFoundException("Rezervacija ne postoji u bazi!");
@@ -142,7 +142,7 @@ public class RezervacijaServiceImpl implements RezervacijaService {
             stavkeRezervacije.add(sr);
         }
         rezervacija.setStavkeRezervacije(stavkeRezervacije);
-        rezervacijaRepository.save(rezervacija);
+        return mapper.rezervacijaToRezervacijaDto(rezervacijaRepository.save(rezervacija));
     }
 
 }
