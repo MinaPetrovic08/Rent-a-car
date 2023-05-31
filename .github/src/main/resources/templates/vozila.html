@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Vozila</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}" href="../css/bootstrap.min.css" />
+        <script src="../static/jquery-3.6.3.js" th:src="@{/jquery-3.6.3.js}"></script>
+        <script src="../static/bootstrap.js" th:src="@{/bootstrap.js}"></script>
+        <script src="../static/bootstrap.bundle.js" th:src="@{/bootstrap.bundle.js}"></script>
+        <script th:inline="javascript" src="../static/fuctions.js" th:src="@{/functions.js}"></script>
+    </head>
+    <body>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/rezervacije}">Rezervacije </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/korisnici}">Korisnici</a>
+                    </li>
+                    <li class="nav-item  active">
+                        <a class="nav-link" th:href="@{/vozila}">Vozila<span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th> Registarski broj </th>
+                        <th> Marka </th>
+                        <th> Model </th>
+                        <th> Kategorija </th>
+                        <th> Cena po danu </th>
+                        <th> Tip vozila </th>
+                        <th> - </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr th:each="vozilo : ${vozila}">
+                        <td th:text="${vozilo.registarskiBroj}"></td>
+                        <td th:text="${vozilo.marka}"></td>
+                        <td th:text="${vozilo.model}"></td>
+                        <td th:text="${vozilo.kategorija}"></td>
+                        <td th:text="${vozilo.cenaPoDanu}"></td>
+                        <td th:text="${vozilo.tipVozila.nazivTipaVozila}"></td>
+                        <td> <a class="btn btn-dark" th:href="@{/vozila/{id}(id=${vozilo.voziloID})}">Details</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <a class="btn btn-dark" th:href="@{/vozila/new}">Novo vozilo</a>
+        </div>
+    </body>
+</html>
